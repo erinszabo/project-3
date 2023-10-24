@@ -5,6 +5,7 @@ from a scrambled string)
 """
 
 import flask
+from flask import request
 import logging
 
 # Our modules

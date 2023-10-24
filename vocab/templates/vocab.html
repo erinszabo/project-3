@@ -72,6 +72,10 @@
          <!-- row -->
          <br />
          <div class="row">
+            
+            <!-- //
+            //
+            //
             <div class="col-xs-6 text-center">
                <form id="entry" method="POST" action="/_check">
                   <label for="attempt">Word:</label>
@@ -80,6 +84,19 @@
                   <input type="submit" name="try" />
                </form>
             </div>
+            //
+            //
+            // -->
+            
+            <div class="col-xs-6 text-center">
+               <form id="entry"  method="POST" action="/_check">
+                  <label for="attempt">Word:</label>
+                  <input id="attempt" name="attempt" type="text" width="15"
+                     autocomplete="off"  autofocus />
+                  
+               </form>
+            </div>
+
          </div>
          <br />
          {% if session.matches|length is not equalto 0  %}
