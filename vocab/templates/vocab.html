@@ -73,21 +73,6 @@
          <br />
          <div class="row">
             
-            <!-- //
-            //
-            //
-            <div class="col-xs-6 text-center">
-               <form id="entry" method="POST" action="/_check">
-                  <label for="attempt">Word:</label>
-                  <input id="attempt" name="attempt" type="text" width="15"
-                     autocomplete="off"  autofocus />
-                  <input type="submit" name="try" />
-               </form>
-            </div>
-            //
-            //
-            // -->
-            
             <div class="col-xs-6 text-center">
                <form id="entry"  method="POST" action="/_check">
                   <label for="attempt">Word:</label>
@@ -96,8 +81,11 @@
                   
                </form>
             </div>
-
          </div>
+
+         <p id="response"> </p>
+         <!-- JavaScript will insert text here -->
+
          <br />
          {% if session.matches|length is not equalto 0  %}
          <h2>You found </h2>
@@ -115,6 +103,53 @@
          {% endfor %}
          {% endif %}
          {% endwith %}
+
+         <!--
+            //
+            //
+            Script from miniJax Below
+            //
+            //
+         -->
+         <script>
+            // Suppress normal form submission
+//            $("#entry").submit( function(event) {
+//               event.preventDefault();
+//              });
+
+            // On each keystroke, ask server if current word is in the
+            // word bank
+            //
+
+//            $("#attempt").keyup(function(event) {
+//               var txt = $("#attempt").val();  // Current content of the input field
+//               var keycode = event.which;      // They key that just went up
+//               var letter = String.fromCharCode(keycode);
+//
+//               if (! "ABCDEFGHIJKLMNOPQRSTUVWXYZ".includes(letter)) { return }
+//
+//               $.getJSON( "/keep_going", { text: txt },
+//                          function(data) {
+//                            mathched = data.result.long_enough;
+//                            // where is, long_enough??
+//                            console.log("mathched: " + mathched)
+//                            if (mathched) {
+//                               $("#response").html("That's enough!");
+//                               $("#attempt").val("");
+//                            } else {
+//                               $("#response").append(txt.length + " ");
+//                            }
+//                            
+//                           }
+//                       );
+//               });
+//
+            
+         </script>
+
+
+
+
       </div>
       <!-- container -->
    </body>
