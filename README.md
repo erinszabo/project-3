@@ -27,7 +27,7 @@ The vocabulary word list is fixed for one invocation of the server, so multiple 
   ```
   docker run -d -p 5001:5000 some-image-name
   ```
- - Launch `http://hostname:5000` using your web browser 
+ - Launch `http://hostname:5001` using your web browser 
 
 
 ## Game
