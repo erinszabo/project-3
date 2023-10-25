@@ -80,6 +80,24 @@ def success():
 #   a JSON request handler
 #######################
 
+@app.route("/_check")
+def check():
+    jumble = flask.session["jumble"]
+    found = flask.session.get("found", [])  
+    text = request.args.get("text", type=str)
+
+    rslt= {"matched": WORDS.has(text),
+          "in_jumble": LetterBag(jumble).contains(text), 
+          "new_word": text not in found,
+          "found_list": found }
+
+
+    return flask.jasonify(result=rslt)
+
+
+################# Old Method
+'''
+
 @app.route("/_check", methods=["POST"])
 def check():
     """
@@ -123,6 +141,9 @@ def check():
     else:
        return flask.redirect(flask.url_for("keep_going"))
 
+
+###########################
+'''
 
 ###############
 # AJAX request handlers

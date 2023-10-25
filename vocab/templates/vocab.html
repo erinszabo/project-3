@@ -113,37 +113,55 @@
          -->
          <script>
             // Suppress normal form submission
-//            $("#entry").submit( function(event) {
-//               event.preventDefault();
-//              });
+            $("#entry").submit( function(event) {
+               event.preventDefault();
+              });
 
             // On each keystroke, ask server if current word is in the
             // word bank
             //
 
-//            $("#attempt").keyup(function(event) {
-//               var txt = $("#attempt").val();  // Current content of the input field
-//               var keycode = event.which;      // They key that just went up
-//               var letter = String.fromCharCode(keycode);
-//
-//               if (! "ABCDEFGHIJKLMNOPQRSTUVWXYZ".includes(letter)) { return }
-//
-//               $.getJSON( "/keep_going", { text: txt },
-//                          function(data) {
-//                            mathched = data.result.long_enough;
-//                            // where is, long_enough??
-//                            console.log("mathched: " + mathched)
-//                            if (mathched) {
-//                               $("#response").html("That's enough!");
-//                               $("#attempt").val("");
-//                            } else {
-//                               $("#response").append(txt.length + " ");
-//                            }
-//                            
-//                           }
-//                       );
-//               });
-//
+            $("#attempt").keyup(function(event) {
+               var txt = $("#attempt").val();  // Current content of the input field
+               var keycode = event.which;      // They key that just went up
+               var letter = String.fromCharCode(keycode);
+
+               if (! "ABCDEFGHIJKLMNOPQRSTUVWXYZ".includes(letter)) { return }
+
+               $.getJSON( "/_check", { text: txt },
+                          function(data) {
+                            mathched = data.result.matched;
+                            in_jumble = data.result.in_jumble;
+                            new_word = data.result.new_word;
+                            found_list = json.dumps(data.result.found_list);
+                            
+                            console.log("mathched: " + mathched);
+                            console.log("in_jumble: " + in_jumble);
+                            console.log("new_word: " + new_word);
+
+                            if (new_word) {
+                               //
+                               if (in_jumble) {
+                                 if (mathched) {
+                                    // new word found! add it to found list
+                                    found_list.push(txt);
+                                    flask.session["matches"] = json.loads(found_list);
+                                    $("#response").append(found_list);
+                                    console.log(txt);
+                                    console.log("maches: " + found_list);
+                                 }
+                               }
+                               else {
+                                 // this word is not spelled with these letters
+                               }
+                            } else {
+                              // this word has already been found
+                            }
+                            
+                           }
+                       );
+               });
+
             
          </script>
 
